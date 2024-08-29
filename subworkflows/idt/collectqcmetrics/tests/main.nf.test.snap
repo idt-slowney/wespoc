@@ -1,0 +1,109 @@
+{
+    "Base Test": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.CollectHsMetrics.coverage_metrics:md5,d97e73ebd635c8831c4eccae67169d7b"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test.CollectMultipleMetrics.alignment_summary_metrics:md5,1aa8b0f3bd84282631786e6daddeb728",
+                            "test.CollectMultipleMetrics.base_distribution_by_cycle_metrics:md5,1ede0c669af457d64e0e85ad31532887",
+                            "test.CollectMultipleMetrics.insert_size_metrics:md5,11c89714b33cc5c6841393eb1350ce59",
+                            "test.CollectMultipleMetrics.quality_by_cycle_metrics:md5,9132a97992f054d1c319d7f3e09107f3",
+                            "test.CollectMultipleMetrics.quality_distribution_metrics:md5,a33744018b03c47f56322be31a1ec5b1"
+                        ]
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_OxoGMetrics.txt:md5,ad053db575f8c436d860d6ea87255ded"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.error_summary_metrics.error_summary_metrics:md5,737ec16b56ca7e5b11d89eb3d724af30"
+                    ]
+                ],
+                "4": [
+                    "versions.yml:md5,8c81422b114d007b53b2a987ed6f220f",
+                    "versions.yml:md5,bcb3347e16a63f8c141261c5adcb40d3",
+                    "versions.yml:md5,ca596aebc9796bd5119536afceabf58d",
+                    "versions.yml:md5,e6eff9debb86fa441f945c1d07936f78"
+                ],
+                "artifact_metrics": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.error_summary_metrics.error_summary_metrics:md5,737ec16b56ca7e5b11d89eb3d724af30"
+                    ]
+                ],
+                "coverage_metrics": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.CollectHsMetrics.coverage_metrics:md5,d97e73ebd635c8831c4eccae67169d7b"
+                    ]
+                ],
+                "multiple_metrics": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test.CollectMultipleMetrics.alignment_summary_metrics:md5,1aa8b0f3bd84282631786e6daddeb728",
+                            "test.CollectMultipleMetrics.base_distribution_by_cycle_metrics:md5,1ede0c669af457d64e0e85ad31532887",
+                            "test.CollectMultipleMetrics.insert_size_metrics:md5,11c89714b33cc5c6841393eb1350ce59",
+                            "test.CollectMultipleMetrics.quality_by_cycle_metrics:md5,9132a97992f054d1c319d7f3e09107f3",
+                            "test.CollectMultipleMetrics.quality_distribution_metrics:md5,a33744018b03c47f56322be31a1ec5b1"
+                        ]
+                    ]
+                ],
+                "oxog_metrics": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_OxoGMetrics.txt:md5,ad053db575f8c436d860d6ea87255ded"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,8c81422b114d007b53b2a987ed6f220f",
+                    "versions.yml:md5,bcb3347e16a63f8c141261c5adcb40d3",
+                    "versions.yml:md5,ca596aebc9796bd5119536afceabf58d",
+                    "versions.yml:md5,e6eff9debb86fa441f945c1d07936f78"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-08-27T15:52:07.340844444"
+    }
+}

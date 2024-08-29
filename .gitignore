@@ -1,0 +1,6 @@
+.nf-test/*
+.nf-test*
+.nextflow/*
+.nextflow.*
+work/*
+work/

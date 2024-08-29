@@ -1,0 +1,2 @@
+subworkflows/processfastq:
+  - subworkflows/idt/processfastq/**

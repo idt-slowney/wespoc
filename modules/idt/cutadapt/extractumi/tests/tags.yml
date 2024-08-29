@@ -1,0 +1,2 @@
+cutadapt/extractumi:
+  - "modules/idt/cutadapt/extractumi/**"

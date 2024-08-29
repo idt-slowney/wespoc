@@ -1,0 +1,236 @@
+{
+    "name": "IDT/wespoc",
+    "homePage": "https://github.com/IDT/wespoc",
+    "repos": {
+        "https://github.com/idt-slowney/IDT-NextflowComponents-PoC.git": {
+            "modules": {
+                "idt": {
+                    "bwamem2/index": {
+                        "branch": "master",
+                        "git_sha": "fff9ec7603c460479ffde62f6d245428e4720e8c",
+                        "installed_by": [
+                            "prepreferencegenome"
+                        ]
+                    },
+                    "bwamem2/mem": {
+                        "branch": "master",
+                        "git_sha": "5b7a1a11b0dea8606234854e12243821cdfdd33e",
+                        "installed_by": [
+                            "alignreads"
+                        ]
+                    },
+                    "cutadapt/extractumi": {
+                        "branch": "master",
+                        "git_sha": "94bbcaccbf7a2516ce3aef82df9bbeb1a82e1c3a",
+                        "installed_by": [
+                            "processfastq"
+                        ]
+                    },
+                    "fastqc": {
+                        "branch": "master",
+                        "git_sha": "5b7a1a11b0dea8606234854e12243821cdfdd33e",
+                        "installed_by": [
+                            "processfastq"
+                        ]
+                    },
+                    "picard/bedtointervallist": {
+                        "branch": "master",
+                        "git_sha": "1df52b47ac921fbb0e2a136cc85546c95d071ca3",
+                        "installed_by": [
+                            "modules"
+                        ]
+                    },
+                    "picard/collecthsmetrics": {
+                        "branch": "master",
+                        "git_sha": "1df52b47ac921fbb0e2a136cc85546c95d071ca3",
+                        "installed_by": [
+                            "collectqcmetrics"
+                        ]
+                    },
+                    "picard/collectmultiplemetrics": {
+                        "branch": "master",
+                        "git_sha": "1df52b47ac921fbb0e2a136cc85546c95d071ca3",
+                        "installed_by": [
+                            "collectqcmetrics"
+                        ]
+                    },
+                    "picard/collectoxogmetrics": {
+                        "branch": "master",
+                        "git_sha": "a091d62b898ba7e73cc00473f600343c2f652f04",
+                        "installed_by": [
+                            "collectqcmetrics"
+                        ]
+                    },
+                    "picard/collectsequencingartifactmetrics": {
+                        "branch": "master",
+                        "git_sha": "a091d62b898ba7e73cc00473f600343c2f652f04",
+                        "installed_by": [
+                            "collectqcmetrics"
+                        ]
+                    },
+                    "picard/collectwgsmetrics": {
+                        "branch": "master",
+                        "git_sha": "fff9ec7603c460479ffde62f6d245428e4720e8c",
+                        "installed_by": [
+                            "collectqcmetrics"
+                        ]
+                    },
+                    "picard/createsequencedictionary": {
+                        "branch": "master",
+                        "git_sha": "fff9ec7603c460479ffde62f6d245428e4720e8c",
+                        "installed_by": [
+                            "prepreferencegenome"
+                        ]
+                    },
+                    "picard/markduplicates": {
+                        "branch": "master",
+                        "git_sha": "fff9ec7603c460479ffde62f6d245428e4720e8c",
+                        "installed_by": [
+                            "alignreads"
+                        ]
+                    },
+                    "samtools/faidx": {
+                        "branch": "master",
+                        "git_sha": "fff9ec7603c460479ffde62f6d245428e4720e8c",
+                        "installed_by": [
+                            "prepreferencegenome"
+                        ]
+                    },
+                    "sentieon/bwaindex": {
+                        "branch": "master",
+                        "git_sha": "fff9ec7603c460479ffde62f6d245428e4720e8c",
+                        "installed_by": [
+                            "prepreferencegenome"
+                        ]
+                    },
+                    "sentieon/bwamem": {
+                        "branch": "master",
+                        "git_sha": "fff9ec7603c460479ffde62f6d245428e4720e8c",
+                        "installed_by": [
+                            "alignreads"
+                        ]
+                    },
+                    "sentieon/datametrics": {
+                        "branch": "master",
+                        "git_sha": "1df52b47ac921fbb0e2a136cc85546c95d071ca3",
+                        "installed_by": [
+                            "collectqcmetrics"
+                        ]
+                    },
+                    "sentieon/dedup": {
+                        "branch": "master",
+                        "git_sha": "fff9ec7603c460479ffde62f6d245428e4720e8c",
+                        "installed_by": [
+                            "alignreads"
+                        ]
+                    },
+                    "sentieon/wgsmetrics": {
+                        "branch": "master",
+                        "git_sha": "fff9ec7603c460479ffde62f6d245428e4720e8c",
+                        "installed_by": [
+                            "collectqcmetrics"
+                        ]
+                    },
+                    "seqtk/sample": {
+                        "branch": "master",
+                        "git_sha": "5b7a1a11b0dea8606234854e12243821cdfdd33e",
+                        "installed_by": [
+                            "processfastq"
+                        ]
+                    },
+                    "trimgalore": {
+                        "branch": "master",
+                        "git_sha": "fff9ec7603c460479ffde62f6d245428e4720e8c",
+                        "installed_by": [
+                            "processfastq"
+                        ]
+                    },
+                    "vardictjava": {
+                        "branch": "master",
+                        "git_sha": "1df52b47ac921fbb0e2a136cc85546c95d071ca3",
+                        "installed_by": [
+                            "modules"
+                        ]
+                    },
+                    "yumi/bam2errorprofile": {
+                        "branch": "master",
+                        "git_sha": "1df52b47ac921fbb0e2a136cc85546c95d071ca3",
+                        "installed_by": [
+                            "modules"
+                        ]
+                    }
+                }
+            },
+            "subworkflows": {
+                "idt": {
+                    "alignreads": {
+                        "branch": "master",
+                        "git_sha": "3658c9713356ec84fd241b60bc12ba9f87121172",
+                        "installed_by": [
+                            "subworkflows"
+                        ]
+                    },
+                    "collectqcmetrics": {
+                        "branch": "master",
+                        "git_sha": "a091d62b898ba7e73cc00473f600343c2f652f04",
+                        "installed_by": [
+                            "subworkflows"
+                        ]
+                    },
+                    "prepreferencegenome": {
+                        "branch": "master",
+                        "git_sha": "ef31aabbad2f92ce067c43e029c3effa95c6980d",
+                        "installed_by": [
+                            "subworkflows"
+                        ]
+                    },
+                    "processfastq": {
+                        "branch": "master",
+                        "git_sha": "5b7a1a11b0dea8606234854e12243821cdfdd33e",
+                        "installed_by": [
+                            "subworkflows"
+                        ]
+                    }
+                }
+            }
+        },
+        "https://github.com/nf-core/modules.git": {
+            "modules": {
+                "nf-core": {
+                    "multiqc": {
+                        "branch": "master",
+                        "git_sha": "b7ebe95761cd389603f9cc0e0dc384c0f663815a",
+                        "installed_by": [
+                            "modules"
+                        ]
+                    }
+                }
+            },
+            "subworkflows": {
+                "nf-core": {
+                    "utils_nextflow_pipeline": {
+                        "branch": "master",
+                        "git_sha": "5caf7640a9ef1d18d765d55339be751bb0969dfa",
+                        "installed_by": [
+                            "subworkflows"
+                        ]
+                    },
+                    "utils_nfcore_pipeline": {
+                        "branch": "master",
+                        "git_sha": "92de218a329bfc9a9033116eb5f65fd270e72ba3",
+                        "installed_by": [
+                            "subworkflows"
+                        ]
+                    },
+                    "utils_nfvalidation_plugin": {
+                        "branch": "master",
+                        "git_sha": "5caf7640a9ef1d18d765d55339be751bb0969dfa",
+                        "installed_by": [
+                            "subworkflows"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

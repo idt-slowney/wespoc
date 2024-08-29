@@ -1,0 +1,83 @@
+{
+    "bwamem2 on paired end illumina fastq": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "sample_size": 10000
+                        },
+                        "test.aligner.test.Aligned.bam:md5,52b3ae00dba9d4e9cd0513793378eee7"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "sample_size": 10000
+                        },
+                        "test.aligner.test.DupMarked.bam:md5,68a4d053a5b5c3b1b31bd8935d63e3f4",
+                        "test.aligner.test.DupMarked.bai:md5,28c1956bd71100f7cd4e539e4ae73bcb"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "sample_size": 10000
+                        },
+                        "test.aligner.test.DupMarked.MarkDuplicates.metrics.txt:md5,1e4050d8eb370f3f639ae3d57a32b067"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,75f8463b1d94fea851ae5842e54c440d",
+                    "versions.yml:md5,d553735d7bf50aa911b9ce84beb5b525"
+                ],
+                "aligned_bams": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "sample_size": 10000
+                        },
+                        "test.aligner.test.Aligned.bam:md5,52b3ae00dba9d4e9cd0513793378eee7"
+                    ]
+                ],
+                "dupmarked_bams": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "sample_size": 10000
+                        },
+                        "test.aligner.test.DupMarked.bam:md5,68a4d053a5b5c3b1b31bd8935d63e3f4",
+                        "test.aligner.test.DupMarked.bai:md5,28c1956bd71100f7cd4e539e4ae73bcb"
+                    ]
+                ],
+                "reports": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false,
+                            "sample_size": 10000
+                        },
+                        "test.aligner.test.DupMarked.MarkDuplicates.metrics.txt:md5,1e4050d8eb370f3f639ae3d57a32b067"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,75f8463b1d94fea851ae5842e54c440d",
+                    "versions.yml:md5,d553735d7bf50aa911b9ce84beb5b525"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-08-09T14:59:10.510773336"
+    }
+}

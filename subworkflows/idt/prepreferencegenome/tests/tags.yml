@@ -1,0 +1,2 @@
+subworkflows/prepreferencegenome:
+  - subworkflows/IDT/prepreferencegenome/**

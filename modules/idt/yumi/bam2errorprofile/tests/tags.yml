@@ -1,0 +1,2 @@
+bam2errorprofile:
+  - "modules/idt/bam2errorprofile/**"

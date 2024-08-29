@@ -1,0 +1,110 @@
+nextflow_workflow {
+
+    name "Test Subworkflow ALIGNREADS"
+    script "../main.nf"
+    workflow "ALIGNREADS"
+    config './nextflow.config'
+
+    tag "subworkflows_nfcore"
+    tag "subworkflows"
+    tag "subworkflows/alignreads"
+    tag "bwamem2/mem"
+    tag "sentieon/bwamem"
+    tag "picard/sortsam"
+    tag "picard/markduplicates"
+    tag "sentieon/dedup"
+    tag "bwamem2/index"
+
+
+    test("bwamem2 on paired end illumina fastq") {
+        setup {
+            run("BWAMEM2_INDEX") {
+                script "../../../../modules/idt/bwamem2/index/main.nf"
+                process {
+                    """
+                    input[0] = Channel.value([ 
+                        [ id:'genome' ],
+                          file(params.test_data['homo_sapiens']['genome']['genome_fasta'], checkIfExists: true)
+                    ])
+                    """
+                }
+            }
+        }
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id:'test', single_end:false, sample_size:10000 ],
+                    [ file(params.test_data['homo_sapiens']['illumina']['test_1_fastq_gz'], checkIfExists: true),
+                      file(params.test_data['homo_sapiens']['illumina']['test_2_fastq_gz'], checkIfExists: true)                   ]
+                ])
+                input[1] = Channel.of([ 
+                    [ id:'genome' ],
+                      file(params.test_data['homo_sapiens']['genome']['genome_fasta'], checkIfExists: true)
+                ])
+                input[2] = Channel.of([ 
+                    [ id:'genome_fai' ],
+                      file(params.test_data['homo_sapiens']['genome']['genome_fasta_fai'], checkIfExists: true)
+                ])
+                input[3] = BWAMEM2_INDEX.out.index
+                input[4] = true
+                input[5] = 'bwa2'
+                input[6] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+    }
+
+    // TODO: Run this test when we acquire Sentieon license
+    // test("sentieon-bwamem on paired end illumina fastq") {
+    //     setup {
+    //         run("SENTIEON_BWAINDEX") {
+    //             script "../../../../modules/idt/sentieon/bwaindex/main.nf"
+    //             process {
+    //                 """
+    //                 input[0] = Channel.value([ [ id:'genome' ],
+    //                     file(params.test_data['homo_sapiens']['genome']['genome_fasta'], checkIfExists: true)
+    //                     ])
+    //                 """
+    //             }
+    //         }
+    //     }
+    //     when {
+    //         workflow {
+    //             """
+    //             input[0] = Channel.of([
+    //                 [ id:'test', single_end:false, sample_size:10000 ],
+    //                 [
+    //                     file(params.test_data['homo_sapiens']['illumina']['test_1_fastq_gz'], checkIfExists: true),
+    //                     file(params.test_data['homo_sapiens']['illumina']['test_2_fastq_gz'], checkIfExists: true)
+    //                 ]
+    //             ])
+    //             input[1] = Channel.of([ [ id:'genome' ],
+    //                     file(params.test_data['homo_sapiens']['genome']['genome_fasta'], checkIfExists: true)
+    //                     ])
+    //             input[2] = Channel.of([ [ id:'genome_fai' ],
+    //                     file(params.test_data['homo_sapiens']['genome']['genome_fasta_fai'], checkIfExists: true)
+    //                     ])
+    //             input[3] = SENTIEON_BWAINDEX.out.index
+    //             input[4] = true
+    //             input[5] = 'sentieon-bwamem'
+    //             input[6] = false
+    //             """
+    //         }
+    //     }
+
+    //     then {
+    //         assertAll(
+    //             { assert workflow.success},
+    //             { assert snapshot(workflow.out).match()}
+    //         )
+    //     }
+    // }
+}

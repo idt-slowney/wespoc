@@ -1,0 +1,84 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "processfastq"
+description: The purpose of the ProcessFastq Nextflow Subworkflow component is to provide a set of tools for processing Fastqs for downstream analysis. This includes Fastq QC, downsampling, trimming, reformatting (extract UMIs), consensus building. 
+keywords:
+  - extract
+  - fastq
+  - trimgalore
+  - downsample
+  - seqtk
+  - fastqc
+  - qc
+components:
+  - fastqc
+  - seqtk/sample
+  - cutadapt/extractumi
+  - trimgalore
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. [ id:'test' ]
+  - reads:
+      type: file
+      description: |
+        List of input FastQ files of size 1 and 2 for single-end and paired-end data,
+        respectively.
+      pattern: "*.{fastq,fastq.gz,fq,fq.gz}"
+  - skip_fastqc:
+      type: boolean
+      description: |
+        Perform or skip fastqc
+  - umi_flag:
+      type: boolean
+      description: |
+        Inputs have or do not have UMIs
+  - skip_extractumi:
+      type: boolean
+      description: |
+        Perform or skip UMI extraction
+  - skip_trimming:
+      type: boolean
+      description: |
+        Allows to skip trimgalore execution
+output:
+  - reads:
+      type: file
+      description: >
+        Processed FASTQ files.
+      pattern: "*.{fastq.gz}"
+  - fastqc_html:
+      type: file
+      description: FastQC report
+      pattern: "*_{fastqc.html}"
+  - fastqc_zip:
+      type: file
+      description: FastQC report archive
+      pattern: "*_{fastqc.zip}"
+  - trimgalore_unpaired:
+      type: file
+      description: |
+        FastQ files containing unpaired reads from read 1 or read 2
+      pattern: "*unpaired*.fq.gz"
+  - trimgalore_html:
+      type: file
+      description: FastQC report (optional)
+      pattern: "*_{fastqc.html}"
+  - trimgalore_zip:
+      type: file
+      description: FastQC report archive (optional)
+      pattern: "*_{fastqc.zip}"
+  - trimgalore_log:
+      type: file
+      description: Trim Galore! trimming report
+      pattern: "*_{report.txt}"
+  - trimgalore_read_count:
+      type: integer
+      description: Number of reads remaining after trimming for all input samples
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+authors:
+  - "@idt-slowney"

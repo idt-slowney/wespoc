@@ -1,0 +1,110 @@
+{
+    "Skip all": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false,
+                        "sample_size": 10000
+                    },
+                    [
+                        "/nf-core/test-datasets/modules/data/genomics/homo_sapiens/illumina/fastq/test.umi_1.fastq.gz",
+                        "/nf-core/test-datasets/modules/data/genomics/homo_sapiens/illumina/fastq/test.umi_2.fastq.gz"
+                    ]
+                ]
+            ],
+            [
+                
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-08-09T13:36:17.861110728"
+    },
+    "Paired end fastq input with UMI": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false,
+                        "sample_size": 10000
+                    },
+                    [
+                        "test_1_val_1.fq.gz:md5,4adc9f02b4f8b503339966b27effe711",
+                        "test_2_val_2.fq.gz:md5,dfc08612c22fb4993b4263f97a07a7c0"
+                    ]
+                ]
+            ],
+            [
+                "versions.yml:md5,06e5e3503bcf65395062c31d07a590f3",
+                "versions.yml:md5,77e3d93e13faa7e33fcad5bc8f577f2b",
+                "versions.yml:md5,7b9f999b76de4a7d95267dfd2d9ddec0",
+                "versions.yml:md5,8bdfbd4b635d2953ad6d090dfe5494c8",
+                "versions.yml:md5,e0d4c6ee367a4d6600b7268278549bae"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-08-09T13:36:03.665176057"
+    },
+    "Paired end fastq input, only skip UMI": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false,
+                        "sample_size": 10000
+                    },
+                    [
+                        "test_1_val_1.fq.gz:md5,1155b07c8311d64495821fb45014e03e",
+                        "test_2_val_2.fq.gz:md5,6c55135fa6eb1138d0c479e8f7dc5fae"
+                    ]
+                ]
+            ],
+            [
+                "versions.yml:md5,06e5e3503bcf65395062c31d07a590f3",
+                "versions.yml:md5,77e3d93e13faa7e33fcad5bc8f577f2b",
+                "versions.yml:md5,7b9f999b76de4a7d95267dfd2d9ddec0",
+                "versions.yml:md5,e0d4c6ee367a4d6600b7268278549bae"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-08-09T13:27:58.290125093"
+    },
+    "Paired end fastq input, skip fastqc": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false,
+                        "sample_size": 10000
+                    },
+                    [
+                        "test_1_val_1.fq.gz:md5,1155b07c8311d64495821fb45014e03e",
+                        "test_2_val_2.fq.gz:md5,6c55135fa6eb1138d0c479e8f7dc5fae"
+                    ]
+                ]
+            ],
+            [
+                "versions.yml:md5,77e3d93e13faa7e33fcad5bc8f577f2b",
+                "versions.yml:md5,e0d4c6ee367a4d6600b7268278549bae"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.3"
+        },
+        "timestamp": "2024-08-09T13:31:03.351857852"
+    }
+}

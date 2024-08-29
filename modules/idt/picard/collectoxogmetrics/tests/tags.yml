@@ -1,0 +1,2 @@
+picard/collectoxogmetrics:
+  - "modules/idt/picard/collectoxogmetrics/**"

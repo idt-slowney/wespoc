@@ -1,0 +1,172 @@
+nextflow_workflow {
+
+    name "Test Subworkflow PROCESSFASTQ"
+    script "../main.nf"
+    workflow "PROCESSFASTQ"
+
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "subworkflows/processfastq"
+    tag "fastqc"
+    tag "seqtk/sample"
+    tag "cutadapt/extractumi"
+    tag "trimgalore"
+
+    test("Paired end fastq input, only skip UMI") {
+
+        when {
+            workflow {
+                """
+                skip_fastqc        = false 
+                skip_downsample    = false
+                umi_flag           = false
+                skip_extractumi    = true
+                read_structure     = '8M143T 8M143T'
+                skip_trimming      = false
+
+                input[0] = Channel.of([
+                    [ id:'test', single_end:false, sample_size:10000 ],
+                    [
+                        file(params.test_data['homo_sapiens']['illumina']['test_1_fastq_gz'], checkIfExists: true),
+                        file(params.test_data['homo_sapiens']['illumina']['test_2_fastq_gz'], checkIfExists: true)
+                    ]
+                ])
+                input[1] = skip_fastqc
+                input[2] = skip_downsample
+                input[3] = umi_flag
+                input[4] = skip_extractumi
+                input[5] = read_structure
+                input[6] = skip_trimming
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                        workflow.out.reads,
+                        workflow.out.versions
+                    ).match()
+                }
+            )
+        }
+    }
+
+    test("Paired end fastq input, skip fastqc") {
+
+        when {
+            workflow {
+                """
+                skip_fastqc        = true 
+                skip_downsample    = false
+                umi_flag           = false
+                skip_extractumi    = true
+                read_structure     = '8M143T 8M143T'
+                skip_trimming      = false
+
+                input[0] = Channel.of([
+                    [ id:'test', single_end:false, sample_size:10000 ],
+                    [ file(params.test_data['homo_sapiens']['illumina']['test_1_fastq_gz'], checkIfExists: true),
+                      file(params.test_data['homo_sapiens']['illumina']['test_2_fastq_gz'], checkIfExists: true) ]
+                ])
+                input[1] = skip_fastqc
+                input[2] = skip_downsample
+                input[3] = umi_flag
+                input[4] = skip_extractumi
+                input[5] = read_structure
+                input[6] = skip_trimming
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert !workflow.out.fastqc_html },
+                { assert !workflow.out.fastqc_zip },
+                { assert snapshot(
+                    workflow.out.reads,
+                    workflow.out.versions).match() }
+            )
+        }
+    }
+
+    test("Paired end fastq input with UMI") {
+
+        when {
+            workflow {
+                """
+                skip_fastqc        = false 
+                skip_downsample    = false
+                umi_flag           = true
+                skip_extractumi    = false
+                read_structure     = '8M143T 8M143T'
+                skip_trimming      = false
+
+                input[0] = Channel.of([
+                    [ id:'test', single_end:false, sample_size:10000 ],
+                    [ file(params.test_data['homo_sapiens']['illumina']['test_umi_1_fastq_gz'], checkIfExists: true),
+                      file(params.test_data['homo_sapiens']['illumina']['test_umi_2_fastq_gz'], checkIfExists: true) ]
+                ])
+                input[1] = skip_fastqc
+                input[2] = skip_downsample
+                input[3] = umi_flag
+                input[4] = skip_extractumi
+                input[5] = read_structure
+                input[6] = skip_trimming
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    workflow.out.reads,
+                    workflow.out.versions).match() }
+            )
+        }
+    }
+
+    test("Skip all") {
+
+        when {
+            workflow {
+                """
+                skip_fastqc        = true 
+                skip_downsample    = true
+                umi_flag           = true
+                skip_extractumi    = true
+                read_structure     = '8M143T 8M143T'
+                skip_trimming      = true
+
+                input[0] = Channel.of([
+                    [ id:'test', single_end:false, sample_size:10000 ],
+                    [ file(params.test_data['homo_sapiens']['illumina']['test_umi_1_fastq_gz'], checkIfExists: true),
+                      file(params.test_data['homo_sapiens']['illumina']['test_umi_2_fastq_gz'], checkIfExists: true) ]
+                ])
+                input[1] = skip_fastqc
+                input[2] = skip_downsample
+                input[3] = umi_flag
+                input[4] = skip_extractumi
+                input[5] = read_structure
+                input[6] = skip_trimming
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert !workflow.out.fastqc_html },
+                { assert !workflow.out.fastqc_zip },
+                { assert !workflow.out.trimgalore_log },
+                { assert snapshot(
+                    workflow.out.reads,
+                    workflow.out.versions).match() }
+            )
+        }
+    }
+}
+

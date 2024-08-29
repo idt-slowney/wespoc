@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "collectqcmetrics"
+description: Gather QC metrics using Picard or Sentieon tools
+keywords:
+  - metrics
+  - picard
+  - hsmetrics
+  - sentieon
+  - coverage
+components:
+  - picard/collectmultiplemetrics
+  - picard/collecthsmetrics
+  - sentieon/datametrics
+input:
+  - bam_and_bai:
+      type: file
+      description: |
+        The input channel containing the BAM and its index file
+        Structure: [ val(meta), path(bam), path(bai) ]
+  - bait_interval:
+      type: file
+      description: Path to an interval list with capture probes
+      pattern: "*interval_list"
+  - target_interval:
+      type: file
+      description: Path to an interval list with target probes
+      pattern: "*interval_list"
+  - fasta:
+      type: file
+      description: Genome FASTA file
+      pattern: "*.{fasta/fa}"
+  - fasta_fai:
+      type: file
+      description: FASTA index file
+      pattern: "*.{fai}"
+  - fasta_dict:
+      type: file
+      description: FASTA dictionary file
+      pattern: "*.{dict}"
+output:
+  - coverage_metrics:
+      type: file
+      description: |
+        Channel containing results of hsmetrics
+        Structure: [ val(meta), path(coverage_metrics) ]
+  - multiple_metrics:
+      type: file
+      description: |
+        Channel containing results of multiple metrics
+        Structure: [ val(meta), path(multiple_metrics) ]
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+params:
+  - accelerate_metrics:
+    type: bool
+    description: use sentieon
+authors:
+  - "@idt-slowney"
+maintainers:
+  - "@idt-slowney"
