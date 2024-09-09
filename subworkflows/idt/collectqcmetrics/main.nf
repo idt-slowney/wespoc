@@ -49,7 +49,7 @@ workflow COLLECT_QC_METRICS {
     oxog_metrics = oxog_metrics.mix(PICARD_COLLECTOXOGMETRICS.out.metrics)
     versions = versions.mix(PICARD_COLLECTOXOGMETRICS.out.versions)
 
-    // ----------------------------------- OxoMetrics ----------------------------------- //
+    // ----------------------------------- OxoGMetrics ----------------------------------- //
     PICARD_COLLECTSEQUENCINGARTIFACTMETRICS( bam_and_bai.map{ meta, bam, bai -> [meta, bam] }, fasta )
     artifact_metrics = artifact_metrics.mix( PICARD_COLLECTSEQUENCINGARTIFACTMETRICS.out.metrics )
     versions = versions.mix( PICARD_COLLECTSEQUENCINGARTIFACTMETRICS.out.versions )
