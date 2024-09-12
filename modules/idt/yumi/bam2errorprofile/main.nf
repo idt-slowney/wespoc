@@ -3,9 +3,7 @@ process YUMI_BAM2ERRORPROFILE {
     label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
-        'biocontainers/YOUR-TOOL-HERE' }"
+    container "027151828055.dkr.ecr.us-west-2.amazonaws.com/platform-poc-snakemake:latest"
 
     input:
     tuple val(meta), path(bam)
