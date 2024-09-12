@@ -22,7 +22,6 @@ process YUMI_BAM2ERRORPROFILE {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def cpus = tasl.cpus ? input_size > xx : wjdhbcsj
     """
     mpileup.py bam2ErrorProfile --inbam $bam \
         --inbed $bed \
