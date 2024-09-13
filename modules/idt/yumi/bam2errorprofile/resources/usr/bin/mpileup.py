@@ -145,7 +145,7 @@ class Mpileup(object):
     def toTableParallel(self, output:Path, qualityCutOff:List[int]=[0, 20, 30], \
             strandness:bool=False, count:str='most_common', \
             ignore0covSites:bool=False, scoreOffSet:int=-33, thread:int=12, \
-            tmpDir:str='/mnt/faster/tmp/') -> None:
+            tmpDir:str='/tmp') -> None:
         ''' 
         Parses the mpileup and save a table describing base counts at each position
         Returns the path of the output table
@@ -288,6 +288,24 @@ class Mpileup(object):
                                    f'{Path(self.path).stem}.mpileup.parsed.table')
         self.toTable(parsedTable, count=count, ignore0covSites=ignore0covSites)
         Mpileup.table2ErrorProfile(parsedTable, output, countInDels, af)
+
+    def toErrorProfileTableParallel(self, output:Optional[Path]=None, countInDels:bool=False, \
+                            count:str='most_common', ignore0covSites:bool=False, 
+                            af:Optional[float]=None, threads:int=4, tmpDir:str="/tmp"):
+        '''
+        Saves an error profile table that details the error rate and error weight
+        of different types of errors
+        Returns the error profile table path
+
+        :param countInDels:  True or False, decides if we count InDels
+        :param output:       the Path to the output table file
+            When None, use the file name stem + error.profile.xlsx
+        '''
+        # turn mpileup to the parsed table first
+        parsedTable = os.path.join(os.path.dirname(self.path), 
+                                   f'{Path(self.path).stem}.mpileup.parsed.table')
+        self.toTableParallel(parsedTable, count=count, ignore0covSites=ignore0covSites, tmpDir=tmpDir, thread=threads)
+        Mpileup.table2ErrorProfileParallel(parsedTable, output, countInDels, af, threads)
 
     @staticmethod
     def table2ErrorProfile(parsedTable:Path, output:Optional[Path]=None, \
@@ -1118,7 +1136,7 @@ def mpileup2Table(*, mpileup:Path, output:Path, qualityCutOff:List[int]=[0, 20, 
 def mpileup2TableParallel(*, mpileup:Path, output:Path, qualityCutOff:List[int]=[0, 20, 30], \
                 strandness:bool=False, count:str='most_common', \
                 ignore0covSites:bool=False, scoreOffSet:int=-33, \
-                threads:int=12, tmpDir:str="/mnt/faster/tmp") -> None:
+                threads:int=12, tmpDir:str="/tmp") -> None:
     '''
     Saves a the parsed table. For each position, we have depth, ref, alt, count of ATGC, inserts, and dels. Parses the mpileup and save a table describing base counts at each position
 
@@ -1235,9 +1253,46 @@ def bam2ErrorProfile(*, inbam:Path, inbed:Path, genome:Path,
     mpileup.toErrorProfileTable(outErrorProfile, count=count, ignore0covSites=ignore0covSites, \
                                 countInDels=countInDels, af=af)
     
+def bam2ErrorProfileParallel(*, inbam:Path, inbed:Path, genome:Path,
+                     maxDepth:int=10000, \
+                     samtools:Path='samtools', thread:int=4, \
+                     downSampleLevel:int=0, qualityThreshold:Optional[int]=None, \
+                     ignore0covSites:bool=False, count:str='all', \
+                     outMpileup:Optional[Path]=None, \
+                     outErrorProfile:Optional[Path]=None, countInDels:bool=True, \
+                     af:Optional[float]=None, tmpDir:str="/tmp"):
+    '''
+    Read a bam file and return a an error profile table, it can also downsample the bam file before generating the mpileup file
+
+    :param inbam:       the path to the inbam
+        !!!inbam needs to be sorted and indexed
+    :param inbed:       the input bed file (usually a target bed file)
+    :param maxDepth:    the maxDepth when generating mpileup file.
+        it is the -d option in samtools mpileup
+    :param samtools:    the path to the samtools
+    :param thread:      the number of thread used by samtools
+    :param outMpileup:  the outpath of mpileup,
+        When None, use the basename of the inbam file, the files would be
+        saved in the same folder as the inbam file
+    :param downSampleLevel:     # reads in the downsampled bam file
+        When 0, there is no down sampling
+    :param qualityThreshold:    the quality threshold during mpileup
+        When None, no minimal Q threshold is applied, Max: 40
+    :param ignore0covSites:     if we ignore the sites that has 0 coverage
+    :param count:       most_common or all, when all, AF equals (count of all alt allele) / depth, when most_common, AF is the AF of most common alt allele
+    :param countInDels: True or False, decides if we count InDels
+    :param af:          a AF filter, when provided, the AF above this threshold would be ignored
+    :param output:      the Path to the output table file
+        When None, use the file name stem + error.profile.xlsx
+    '''
+
+    mpileup = Mpileup.fromBam(inbam, maxDepth, samtools, thread, genome, 
+                              inbed, downSampleLevel, qualityThreshold, outMpileup)
+    mpileup.toErrorProfileTableParallel(outErrorProfile, count=count, ignore0covSites=ignore0covSites, \
+                                countInDels=countInDels, af=af, threads=thread, tmpDir=tmpDir)
 
 
 if __name__ == "__main__":
     defopt.run([mpileupFromBam, mpileup2Table, mpileup2ErrorProfile, \
                 table2ErrorProfile, bam2ErrorProfile, mpileup2TableParallel, \
-                table2ErrorProfileParallel, calcErrorProfileVariance])
+                table2ErrorProfileParallel, bam2ErrorProfileParallel,  calcErrorProfileVariance])

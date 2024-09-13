@@ -3,7 +3,7 @@ process YUMI_BAM2ERRORPROFILE {
     label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
-    // container "027151828055.dkr.ecr.us-west-2.amazonaws.com/platform-poc-snakemake:latest"
+    container "slowney/yumi:latest"
 
     input:
     tuple val(meta), path(bam)
@@ -20,11 +20,13 @@ process YUMI_BAM2ERRORPROFILE {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def tmpDir = params.tmpDir ?: "/tmp"
     """
-    mpileup.py bam2ErrorProfile --inbam $bam \
+    mpileup.py bam2ErrorProfileParallel --inbam $bam \
         --inbed $bed \
         --genome $fasta \
         --thread $task.cpus \
+        --tmpDir $tmpDir \
         $args \
         --outErrorProfile ${prefix}_mpileup_error_rate.txt
     
